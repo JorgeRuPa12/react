@@ -3,18 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Contador from './components/Contador';
-import DibujosComplejos from './components/DibujosComplejos';
-import DibujosComplejosReact from './components/DibujosComplejosReact';
-import HijoDeporte from './components/HijoDeporte';
-import PadreDeporte from './components/PadreDeporte';
-import PadreNumeros from './components/PadreNumeros';
-import Comics from './components/Comics';
+import Home from './components/Home';
+import Router from './components/Router';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Comics />
+    <h1>INDEX PRINCIPAL</h1>
+    <hr/>
+      <Router/>
+    <hr/>
+    <footer>Pie de pagina</footer>
   </React.StrictMode>
 );
 

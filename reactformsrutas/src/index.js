@@ -5,13 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Home from './components/Home';
 import Router from './components/Router';
+import MenuRutas from './components/MenuRutas';
+import FormSimple from './components/FormSimple';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <h1>INDEX PRINCIPAL</h1>
+    <MenuRutas/>
     <hr/>
       <Router/>
+      {/* <FormSimple /> */}
     <hr/>
     <footer>Pie de pagina</footer>
   </React.StrictMode>

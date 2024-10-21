@@ -59,7 +59,7 @@ export default class BuscarCoche extends Component {
             {
                 this.state.coches &&
                 (
-                    <table>
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Coche</th>

@@ -10,11 +10,13 @@ import Departamentos from './components/MaestroDetalle/Departamentos';
 import TablaMultiplicar from './components/TablaMultiplicar';
 import Router from './components/Router';
 import MenuRutas from './components/MenuRutas';
+import Trabajadores from "./components/TrabajadoresHospitales/Trabajadores";
+import HospitalesMultiples from "./components/TrabajadoresHospitales/HospitalesMultiples";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <div>
-        <Router/>
+        <HospitalesMultiples/>
     </div>
 );
 

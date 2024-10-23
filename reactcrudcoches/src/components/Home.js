@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import Global from '../Global'
 import axios from 'axios'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Navigate} from 'react-router-dom'
 
 export default class Home extends Component {
 
     cajaid = React.createRef()
     state = {
-        coches: []
+        coches: [],
+        status: false
     }
 
     loadCoches = () => {
@@ -24,12 +25,34 @@ export default class Home extends Component {
     buscarCoche = (e) => {
         e.preventDefault()
         let id = parseInt(this.cajaid.current.value);
-        let request = "api/Coches/FindCoche/" + id;
-        let url = Global.urlCoches + request;
-        axios.get(url).then(response => {
-            this.setState({
-                coches: response.data
+        if(isNaN(id))  {
+            this.loadCoches()
+        }else{
+            let request = "api/Coches/FindCoche/" + id;
+            let url = Global.urlCoches + request;
+            axios.get(url).then(response => {
+                this.setState({
+                    coches: [response.data]
+                })
             })
+        }
+    }
+
+    borrarCoche = () => {
+        let id = this.state.idCocheABorrar
+        let request = "api/Coches/DeleteCoche/" + id;
+        let url = Global.urlCoches + request
+        axios.delete(url).then(response => {
+            this.setState({
+                status: true
+            })
+        })
+        this.loadCoches()
+    }
+
+    empezarBorrado = (id) => {
+        this.setState({
+            idCocheABorrar: id
         })
     }
 
@@ -72,10 +95,12 @@ export default class Home extends Component {
                                     <td>{coche.modelo}</td>
                                     <td>{coche.conductor}</td>
                                     <td><img src={coche.imagen} width="128" /></td>
-                                    <td><NavLink to={"/update/" + coche.idCoche + "/" + coche.marca + "/" + coche.modelo + "/" + coche.conductor + "/" + coche.imagen + "/"}
+                                    <td><NavLink to={"/detalle/" + coche.idCoche} className="btn btn-outline-info">Detalles</NavLink></td>
+                                    <td><NavLink to={"/update/" + coche.idCoche + "/" + coche.marca + "/" + coche.modelo + "/" + coche.conductor}
                                      className='btn btn-outline-primary'>Modificar</NavLink></td>
-                                    <td><NavLink className='btn btn-outline-danger'>Borrar</NavLink></td>
+                                    <td><button className='btn btn-outline-danger' onClick={this.empezarBorrado(coche.idCoche)} data-bs-toggle="modal" data-bs-target="#exampleModal">Borrar</button></td>
                                 </tr>
+                                
                                 )
                                 
                             })
@@ -84,7 +109,25 @@ export default class Home extends Component {
                     }
                 </tbody>
             </table>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Estas seguro de que quieres borrar este coche
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" onClick={this.borrarCoche} data-bs-dismiss="modal" class="btn btn-danger">Eliminar</button>
+                </div>
+                </div>
+            </div>
+            </div>
         </div>
+        
         )
     }
 }

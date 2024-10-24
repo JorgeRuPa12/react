@@ -31,7 +31,7 @@ export default class DetalleCoche extends Component {
               <li className='list-group-item active'>Coche: {this.props.id}</li>
               <li className='list-group-item'>{this.state.coche.marca} - {this.state.coche.modelo}</li>
               <li className='list-group-item'>{this.state.coche.conductor}</li>
-              <li className='list-group-item'><img src={this.state.coche.imagen} width="256"/></li>
+              <li className='list-group-item'><img src={this.state.coche.imagen} width="384"/></li>
             </ul>
           </div>
           <div className='col-3'></div>

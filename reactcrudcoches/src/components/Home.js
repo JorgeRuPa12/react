@@ -38,16 +38,18 @@ export default class Home extends Component {
         }
     }
 
-    borrarCoche = () => {
+    borrarCoche = async ()  => {
         let id = this.state.idCocheABorrar
         let request = "api/Coches/DeleteCoche/" + id;
         let url = Global.urlCoches + request
-        axios.delete(url).then(response => {
+        await axios.delete(url).then(response => {
             this.setState({
                 status: true
             })
+            
         })
         this.loadCoches()
+        
     }
 
     empezarBorrado = (id) => {
@@ -57,7 +59,7 @@ export default class Home extends Component {
     }
 
     componentDidMount = () => {
-        this.loadCoches()
+        this.loadCoches();
     }
 
     render() {
